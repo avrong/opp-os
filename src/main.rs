@@ -18,20 +18,20 @@ pub extern "C" fn _start() -> ! {
         stack_overflow();
     }
 
-    stack_overflow();
+    // stack_overflow();
 
     #[cfg(test)]
     test_main();
 
     println!("It did not crash!");
-    loop {}
+    opp_os::hlt_loop();
 }
 
 #[cfg(not(test))]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    opp_os::hlt_loop();
 }
 
 #[cfg(test)]
