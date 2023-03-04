@@ -11,9 +11,19 @@ use opp_os::println;
 pub extern "C" fn _start() -> ! {
     println!("Hello World!");
 
+    opp_os::init();
+
+    #[allow(unconditional_recursion)]
+    fn stack_overflow() {
+        stack_overflow();
+    }
+
+    stack_overflow();
+
     #[cfg(test)]
     test_main();
 
+    println!("It did not crash!");
     loop {}
 }
 
